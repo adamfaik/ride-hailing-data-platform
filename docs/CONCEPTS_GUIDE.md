@@ -103,5 +103,3 @@ GCP provides the scalable, serverless infrastructure for our long-term analytics
 
 ### Why We Use It
 This combination gives us the best of both worlds. GCS provides cheap, scalable storage for our data lake, while BigQuery provides a powerful, serverless engine to run complex analytics and machine learning (`BigQuery ML`) on that data without managing any infrastructure.
-```
-5.  Save the `CONCEPTS_GUIDE.md` file.
