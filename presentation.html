@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Presentation: Real-Time Ride-Hailing Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; 
+            overflow-y: auto;
+        }
+        .slide-center-content {
+            justify-content: center;
+        }
+        .slide.active {
+            display: flex;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-2 sm:p-4">
+    <div class="w-full max-w-4xl mx-auto">
+        <div id="presentation-container" class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+            <div class="relative h-[600px] sm:h-[550px] md:h-[650px]">
+                </div>
+            <div class="bg-gray-50 border-t border-gray-200 px-4 sm:px-8 py-4 flex items-center justify-between">
+                <div class="text-xs sm:text-sm text-gray-500">
+                    Slide <span id="current-slide">1</span> of <span id="total-slides">37</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="prev-btn" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-3 text-xs sm:text-base sm:px-4 border border-gray-300 rounded-lg shadow-sm disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+                        Previous
+                    </button>
+                    <button id="next-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-3 text-xs sm:text-base sm:px-4 rounded-lg shadow-md disabled:opacity-50 disabled:cursor-not-allowed transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Next
+                    </button>
+                </div>
+            </div>
+        </div>
+        <footer class="text-center mt-6 text-gray-500 text-sm">
+            Real-Time Ride-Hailing Platform Presentation
+        </footer>
+    </div>
+
+    <script>
+        const slidesData = [
+            // Slide 1: Cover
+            {
+                type: 'cover',
+                title: 'Real-Time Ride-Hailing Data Platform',
+                subtitle: 'SDA 6 - Data Streaming Final Project',
+                meeting: 'Final Project Presentation',
+                presenter: 'Adam Faik',
+                contact: {
+                    email: 'adam.faik.perso@gmail.com',
+                    github: 'github.com/adamfaik/ride-hailing-data-platform'
+                },
+                date: 'October 2025'
+            },
+            // Slide 2: Agenda
+            {
+                type: 'content',
+                isCentered: true,
+                title: 'Agenda',
+                content: `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-center max-w-3xl mx-auto">
+                        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 shadow-sm flex items-center justify-center">
+                            <h3 class="text-xl md:text-2xl font-semibold text-indigo-700">1. Project Overview</h3>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 shadow-sm flex items-center justify-center">
+                            <h3 class="text-xl md:text-2xl font-semibold text-indigo-700">2. Demonstration</h3>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 shadow-sm flex items-center justify-center">
+                            <h3 class="text-xl md:text-2xl font-semibold text-indigo-700">3. Final Deliverables</h3>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 shadow-sm flex items-center justify-center">
+                            <h3 class="text-xl md:text-2xl font-semibold text-indigo-700">4. Architecture Proposal</h3>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 shadow-sm flex items-center justify-center">
+                            <h3 class="text-xl md:text-2xl font-semibold text-indigo-700">5. Conclusion</h3>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 shadow-sm flex items-center justify-center">
+                            <h3 class="text-xl md:text-2xl font-semibold text-indigo-700">6. Annex</h3>
+                        </div>
+                    </div>
+                `
+            },
+            // Slide 3: Section 1 Delimiter
+            {
+                type: 'title',
+                title: 'Section 1: Project Overview',
+                subtitle: 'Context, Objectives, and Technology',
+                sectionNumber: 1
+            },
+            // Slide 4: Project Context
+            {
+                type: 'content',
+                isCentered: true,
+                title: 'Project Context & Objectives',
+                content: `
+                    <p class="mb-8 text-gray-600 text-center">This project meets three key business objectives by building a complete backend data platform.</p>
+                    <div class="flex justify-center">
+                        <ul class="space-y-6 max-w-2xl text-left">
+                            <li class="flex items-start">
+                                <svg class="h-8 w-8 text-indigo-500 mr-4 flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <div><strong class="font-semibold text-gray-800">Objective 1: Calculate Trip Cost</strong><br><span class="text-base md:text-lg">Develop a real-time service to calculate the distance and price of a ride based on comfort level.</span></div>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-8 w-8 text-indigo-500 mr-4 flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" /></svg>
+                                <div><strong class="font-semibold text-gray-800">Objective 2: Implement a Live Dashboard</strong><br><span class="text-base md:text-lg">Create a real-time dashboard for live monitoring of trip data and revenue.</span></div>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-8 w-8 text-indigo-500 mr-4 flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" /></svg>
+                                <div><strong class="font-semibold text-gray-800">Objective 3: Build a Data Warehouse</strong><br><span class="text-base md:text-lg">Enable real-time machine learning and advanced analytics on historical and live data.</span></div>
+                            </li>
+                        </ul>
+                    </div>
+                `
+            },
+            // Slide 5: Technical Stack
+            {
+                type: 'content',
+                title: 'Technical Stack',
+                content: `
+                    <p class="mb-8 text-gray-600">The platform integrates a modern, open-source stack for data streaming, processing, and analysis.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 md:gap-y-6">
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                            <img src="https://cdn.worldvectorlogo.com/logos/python-5.svg" class="h-10 w-10 mr-4">
+                            <div><strong class="font-semibold text-gray-800">Data Ingestion:</strong> Python/Simple Script</div>
+                        </div>
+                         <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                            <img src="https://cdn.worldvectorlogo.com/logos/elastic-kibana.svg" class="h-10 w-10 mr-4">
+                            <div><strong class="font-semibold text-gray-800">Data Visualization:</strong> Kibana</div>
+                        </div>
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                            <img src="https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/apache-airflow.png" class="h-10 w-10 mr-4">
+                            <div><strong class="font-semibold text-gray-800">Orchestration:</strong> Apache Airflow</div>
+                        </div>
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Google_Cloud_storage.svg/2048px-Google_Cloud_storage.svg.png" class="h-10 w-10 mr-4">
+                            <div><strong class="font-semibold text-gray-800">Data Lake:</strong> Google Cloud Storage</div>
+                        </div>
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                           <img src="https://cdn.worldvectorlogo.com/logos/elasticsearch.svg" class="h-10 w-10 mr-4">
+                            <div><strong class="font-semibold text-gray-800">Data Indexing:</strong> Elasticsearch</div>
+                        </div>
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                            <img src="https://images.icon-icons.com/2699/PNG/512/google_bigquery_logo_icon_168150.png" class="h-10 w-10 mr-4">
+                            <div><strong class="font-semibold text-gray-800">Data Warehouse:</strong> Google BigQuery</div>
+                        </div>
+                    </div>
+                `
+            },
+            // Slide 6: High-Level Architecture
+            {
+                type: 'content',
+                isCentered: true,
+                title: 'End-to-End System Architecture',
+                content: `
+                    <p class="mb-8 text-gray-600 text-center">This diagram illustrates the two Airflow DAGs that form the core of the data processing pipeline.</p>
+                    <div class="space-y-6 font-mono text-xs sm:text-sm">
+                        <div class="flex items-center justify-center gap-2 sm:gap-4">
+                            <div class="bg-gray-100 p-2 sm:p-3 rounded-lg border border-gray-300">ConsumKafka</div>
+                            <div class="text-indigo-500 font-bold text-xl sm:text-2xl">→</div>
+                            <div class="bg-gray-100 p-2 sm:p-3 rounded-lg border border-gray-300">ComputCostTravel</div>
+                            <div class="text-indigo-500 font-bold text-xl sm:text-2xl">→</div>
+                            <div class="bg-gray-100 p-2 sm:p-3 rounded-lg border border-gray-300">PublishKafka</div>
+                        </div>
+                        <div class="flex items-center justify-center gap-2 sm:gap-4">
+                            <div class="bg-gray-100 p-2 sm:p-3 rounded-lg border border-gray-300">ConsumKafka</div>
+                            <div class="text-indigo-500 font-bold text-xl sm:text-2xl">→</div>
+                            <div class="bg-gray-100 p-2 sm:p-3 rounded-lg border border-gray-300">TransformJson</div>
+                            <div class="text-indigo-500 font-bold text-xl sm:text-2xl">→</div>
+                            <div class="flex flex-col gap-3 relative">
+                                <div class="bg-green-100 p-2 sm:p-3 rounded-lg border border-green-300">PutElasticSearch</div>
+                                <div class="bg-blue-100 p-2 sm:p-3 rounded-lg border border-blue-300">PutGCP</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            // Slide 7: Section 2 Delimiter
+            {
+                type: 'title',
+                title: 'Section 2: Demonstration',
+                subtitle: 'Following a Single Trip Through the Pipeline',
+                sectionNumber: 2
+            },
+            // Slide 8: Big Picture Demo Flow
+            {
+                type: 'content',
+                isCentered: true,
+                title: 'Demonstration: The Story of a Single Trip',
+                content: `
+                    <p class="mb-8 text-gray-600 text-center">We will follow a single trip request as it travels through our entire data platform.</p>
+                    <div class="flex flex-col items-center gap-2 font-mono text-xs sm:text-sm">
+                        <div class="bg-gray-100 p-3 rounded-lg border border-gray-300 w-full md:w-3/4 text-center">1. Python Producer sends trip to Kafka</div>
+                        <div class="text-indigo-500 font-bold text-2xl">↓</div>
+                        <div class="bg-gray-100 p-3 rounded-lg border border-gray-300 w-full md:w-3/4 text-center">2. Airflow DAG 1 enriches the trip data</div>
+                        <div class="text-indigo-500 font-bold text-2xl">↓</div>
+                        <div class="bg-gray-100 p-3 rounded-lg border border-gray-300 w-full md:w-3/4 text-center">3. Airflow DAG 2 fans out the data</div>
+                        <div class="text-indigo-500 font-bold text-2xl">↓</div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full md:w-3/4">
+                            <div class="bg-green-100 p-3 rounded-lg border border-green-300 text-center">4a. Data appears in the Kibana Dashboard</div>
+                            <div class="bg-blue-100 p-3 rounded-lg border border-blue-300 text-center">4b. Data lands in GCS & is queried by BigQuery</div>
+                        </div>
+                    </div>
+                `
+            },
+            // Slide 9: Step 1 Data Ingestion
+            {
+                type: 'content',
+                title: 'Step 1: Data Ingestion (Producer → Kafka)',
+                content: `
+                    <div class="flex flex-col h-full">
+                        <div class="space-y-4 mb-6">
+                            <h3 class="text-xl md:text-2xl font-bold text-indigo-700">Process</h3>
+                            <p class="text-gray-700 text-base md:text-lg">A Python script (\`producer.py\`) generates trip request data and publishes these messages to the \`topic_source\` Kafka topic, initiating the entire pipeline.</p>
+                        </div>
+                        <div class="flex-grow flex items-center justify-center">
+                            <img src="docs/images/04_producer-consumer-test.png" alt="Producer and Consumer Test" class="rounded-lg shadow-lg border max-w-full max-h-full object-contain">
+                        </div>
+                    </div>
+                `
+            },
+            // Slide 10: Step 2 DAG 1
+            {
+                type: 'content',
+                title: 'Step 2: DAG 1 - Trip Cost Calculation',
+                content: `
+                    <div class="flex flex-col h-full">
+                        <div class="space-y-4 mb-6">
+                            <h3 class="text-xl md:text-2xl font-bold text-indigo-700">Process</h3>
+                            <p class="text-gray-700 text-base md:text-lg">This DAG consumes from \`topic_source\`, calculates trip cost, and publishes the enriched message to \`topic_result\`.</p>
+                            <ul class="list-disc list-inside text-gray-700 text-sm md:text-base space-y-1">
+                                <li><strong>ConsumKafka:</strong> Reads one message from \`topic_source\`.</li>
+                                <li><strong>ComputCostTravel:</strong> Calculates trip distance and price.</li>
+                                <li><strong>PublishKafka:</strong> Writes the enriched result to \`topic_result\`.</li>
+                            </ul>
+                        </div>
+                        <div class="flex-grow flex items-center justify-center">
+                            <img src="docs/images/06_dag1-graph-view-success.png" alt="DAG 1 Graph View Success" class="rounded-lg shadow-lg border max-w-full max-h-full object-contain">
+                        </div>
+                    </div>
+                `
+            },
+            // Slide 11: Verification ComputCostTravel
+            {
+                type: 'content',
+                title: 'Verification: Enriched Message in `topic_result`',
+                content: `
+                    <p class="mb-6 md:mb-8 text-gray-600">This screenshot of a Kafka consumer listening to \`topic_result\` shows the output from DAG 1. The message now contains the new \`distance\` and \`prix_travel\` fields, confirming the operator worked as required.</p>
+                    <img src="docs/images/08_dag1-final-result-in-kafka.png" alt="Final result in Kafka topic_result" class="w-full h-auto rounded-lg shadow-md mx-auto max-w-3xl border">
+                `
+            },
+            // Slide 12: Step 3 DAG 2
+            {
+                type: 'content',
+                title: 'Step 3: DAG 2 - Loading to Elasticsearch & GCP',
+                content: `
+                    <div class="flex flex-col h-full">
+                        <div class="space-y-4 mb-6">
+                            <h3 class="text-xl md:text-2xl font-bold text-indigo-700">Process</h3>
+                            <p class="text-gray-700 text-base md:text-lg">This DAG loads data into two destinations in parallel:</p>
+                             <ul class="list-disc list-inside text-gray-700 text-sm md:text-base space-y-1">
+                                <li><strong>PutElasticSearch:</strong> For the real-time dashboard.</li>
+                                <li><strong>PutGCP:</strong> For the analytics data warehouse.</li>
+                            </ul>
+                        </div>
+                        <div class="flex-grow flex items-center justify-center">
+                            <img src="docs/images/10_dag2-run-success.png" alt="DAG 2 Run Success" class="rounded-lg shadow-lg border max-w-full max-h-full object-contain">
+                        </div>
+                    </div>
+                `
+            },
+            // Slide 13: Verification: Data in Elasticsearch
+            {
+                type: 'content',
+                title: 'Verification: Data Arrives in Elasticsearch',
+                content: `
+                    <p class="mb-6 md:mb-8 text-gray-600">After DAG 2 runs, the transformed data immediately appears in Kibana's Discover tab. This confirms the real-time pipeline successfully indexed the trip document into Elasticsearch.</p>
+                    <img src="docs/images/11_dag2-result-in-kibana.png" alt="Result in Kibana Discover" class="w-full h-auto rounded-lg shadow-md mx-auto max-w-3xl border">
+                `
+            },
+            // Slide 14: Verification: Data in Google Cloud Storage
+            {
+                type: 'content',
+                title: 'Verification: Data Arrives in Google Cloud Storage',
+                content: `
+                    <p class="mb-6 md:mb-8 text-gray-600">Simultaneously, the same transformed data is written as a new JSON file to our GCS data lake. This proves the analytics branch of the pipeline is working correctly.</p>
+                    <img src="docs/images/12_dag2-result-in-gcs.png" alt="Result in Google Cloud Storage" class="w-full h-auto rounded-lg shadow-md mx-auto max-w-3xl border">
+                `
+            },
+            // Slide 15: Section 3 Delimiter
+            {
+                type: 'title',
+                title: 'Section 3: Final Deliverables',
+                subtitle: 'Visualizing and Analyzing the Real-Time Data',
+                sectionNumber: 3
+            },
+            // Slide 16: Deliverable 1 Kibana
+            {
+                type: 'content',
+                title: 'Deliverable 1: Real-Time Kibana Dashboard',
+                content: `
+                    <p class="mb-6 md:mb-8 text-gray-600">The dashboard visualizes revenue by comfort type and plots trip locations on a map, enabled by \`geo_point\` mapping.</p>
+                    <img src="docs/images/20_kibana-final-dashboard.png" alt="Final Kibana Dashboard" class="w-full h-auto rounded-lg shadow-md mx-auto max-w-3xl border">
+                `
+            },
+            // Slide 17: Deliverable 2 BQ Setup
+            {
+                type: 'content',
+                title: 'Deliverable 2: BigQuery ML Setup',
+                content: `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="text-center">
+                            <h3 class="font-semibold text-lg md:text-xl text-gray-800 mb-2">External Table Creation</h3>
+                            <img src="docs/images/13_bigquery-external-table-setup.png" alt="BigQuery External Table Setup" class="rounded-lg shadow-md border">
+                            <p class="text-xs text-center mt-2 text-gray-500">An External Table points to GCS, allowing queries on data in-place without ingestion delays.</p>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="font-semibold text-lg md:text-xl text-gray-800 mb-2">Model Training</h3>
+                            <img src="docs/images/17_bigquery-trained-model-details.png" alt="BigQuery Trained Model Details" class="rounded-lg shadow-md border">
+                            <p class="text-xs text-center mt-2 text-gray-500">A K-Means model was trained using CSV data, ready for predictions.</p>
+                        </div>
+                    </div>
+                `
+            },
+            // Slide 18: Deliverable 2 Final Query
+            {
+                type: 'content',
+                title: 'Deliverable 2: Real-Time Revenue Calculation',
+                content: `
+                    <p class="mb-6 md:mb-8 text-gray-600">This query joins live data with ML predictions, parses location, applies the model, and aggregates price to calculate the final business metric.</p>
+                    <img src="docs/images/18_bigquery-final-analytics-query.png" alt="BigQuery Final Analytics Query" class="w-full h-auto rounded-lg shadow-md mx-auto max-w-3xl border">
+                `
+            },
+            // Slide 19: Final Query Results
+            {
+                type: 'content',
+                title: 'Final Query Results',
+                content: `
+                    <p class="mb-6 md:mb-8 text-gray-600">The result shows real-time total revenue (\`chiffre d'affaires\`) per cluster and comfort type. Re-running the query provides updated numbers as new data arrives.</p>
+                    <img src="docs/images/19_bigquery-final-analytics-result.png" alt="BigQuery Final Analytics Result" class="w-full h-auto rounded-lg shadow-md mx-auto max-w-3xl border">
+                `
+            },
+            // Slide 20: Section 4 Delimiter
+            {
+                type: 'title',
+                title: 'Section 4: Architecture Proposal',
+                subtitle: 'Scaling for a Production Environment',
+                sectionNumber: 4
+            },
+            // Slide 21: Consolidated Architecture
+            {
+                type: 'content',
+                title: 'Production Architecture: Setup & Monitoring',
+                content: `
+                    <p class="mb-8 text-gray-600">Moving to production requires a robust cluster setup for high availability and a comprehensive monitoring stack for operational health.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-gray-50 p-6 rounded-lg border">
+                            <h3 class="font-bold text-xl text-indigo-700 mb-4">Cluster Setup</h3>
+                            <ul class="space-y-4 text-sm">
+                                <li class="flex items-start">
+                                    <svg class="h-6 w-6 mr-3 text-indigo-500 flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 17.25v-.228a4.5 4.5 0 00-.12-1.03l-2.268-9.64a3.375 3.375 0 00-3.285-2.816H7.88a3.375 3.375 0 00-3.285 2.816l-2.268 9.64a4.5 4.5 0 00-.12 1.03v.228m19.5 0a3 3 0 01-3 3H5.25a3 3 0 01-3-3m19.5 0a3 3 0 00-3-3H5.25a3 3 0 00-3 3m16.5 0h.008v.008h-.008v-.008z" /></svg>
+                                    <div><strong class="font-semibold text-gray-800">3 Brokers:</strong> The standard for high availability, allowing a replication factor of 3 to tolerate broker failure.</div>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-6 w-6 mr-3 text-indigo-500 flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 002.25-2.25V5.25a2.25 2.25 0 00-2.25-2.25H6.75A2.25 2.25 0 004.5 5.25v13.5A2.25 2.25 0 006.75 19.5z" /></svg>
+                                    <div><strong class="font-semibold text-gray-800">50GB SSD per Broker:</strong> Safely covers storage needs with a buffer for growth.</div>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-6 w-6 mr-3 text-indigo-500 flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" /></svg>
+                                    <div><strong class="font-semibold text-gray-800">Multiple Partitions:</strong> Enables parallel processing (3 for source, 6 for result) to prevent bottlenecks.</div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="bg-gray-50 p-6 rounded-lg border">
+                             <h3 class="font-bold text-xl text-indigo-700 mb-4">Monitoring Stack</h3>
+                             <ul class="space-y-4 text-sm">
+                                <li class="flex items-start">
+                                    <svg class="h-6 w-6 mr-3 text-indigo-500 flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 100 15 7.5 7.5 0 000-15z" /><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.25-5.25" /></svg>
+                                    <div><strong class="font-semibold text-gray-800">Prometheus:</strong> Scrapes key metrics like consumer lag and throughput via a Kafka Exporter.</div>
+                                </li>
+                                 <li class="flex items-start">
+                                    <svg class="h-6 w-6 mr-3 text-indigo-500 flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" /></svg>
+                                    <div><strong class="font-semibold text-gray-800">Grafana:</strong> Visualizes scraped metrics on real-time dashboards for full observability.</div>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="h-6 w-6 mr-3 text-indigo-500 flex-shrink-0 mt-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" /></svg>
+                                    <div><strong class="font-semibold text-gray-800">Alertmanager:</strong> Sends automated alerts if a broker fails or performance degrades.</div>
+                                </li>
+                             </ul>
+                        </div>
+                    </div>
+                `
+            },
+            // Slide 22: Section 5 Delimiter
+            {
+                type: 'title',
+                title: 'Section 5: Conclusion',
+                subtitle: 'Project Summary and Achievements',
+                sectionNumber: 5
+            },
+            // Slide 23: Conclusion
+            {
+                type: 'content',
+                isCentered: true,
+                title: 'Project Summary & Achievements',
+                content: `
+                     <div class="flex justify-center items-center h-full">
+                        <ul class="space-y-4 text-lg md:text-xl max-w-3xl text-left">
+                            <li class="flex items-start">
+                                <svg class="h-8 w-8 text-green-500 mr-4 flex-shrink-0" style="margin-top: 0.125rem;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <div>Successfully built an end-to-end, real-time data streaming platform.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <svg class="h-8 w-8 text-green-500 mr-4 flex-shrink-0" style="margin-top: 0.125rem;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <div>Integrated 6 key technologies: Python, Kafka, Airflow, Elasticsearch, Kibana, and Google Cloud.</div>
+                            </li>
+                            <li class="flex items-start">
+                               <svg class="h-8 w-8 text-green-500 mr-4 flex-shrink-0" style="margin-top: 0.125rem;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <div>Delivered both a live monitoring dashboard and a real-time analytics warehouse with ML.</div>
+                            </li>
+                             <li class="flex items-start">
+                               <svg class="h-8 w-8 text-green-500 mr-4 flex-shrink-0" style="margin-top: 0.125rem;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                <div>All project requirements have been successfully met.</div>
+                            </li>
+                        </ul>
+                    </div>
+                `
+            },
+            // Slide 24: Q&A
+            {
+                type: 'title',
+                title: 'Thank You',
+                subtitle: 'Q & A'
+            },
+            // Slide 25: Section 6 Delimiter
+            {
+                type: 'title',
+                title: 'Section 6: Annex',
+                subtitle: 'Technical Evidence & Setup Details',
+                sectionNumber: 6
+            },
+            // Slide 26: Annex 1a
+            {
+                type: 'content',
+                title: 'Annex 1a: Docker Compose Configuration',
+                content: `
+                    <div class="flex justify-center items-center h-full">
+                        <img src="docs/images/01_docker-compose-config.png" alt="Docker Compose Configuration" class="rounded-lg shadow-md border max-w-full max-h-full object-contain">
+                    </div>
+                `
+            },
+            // Slide 27: Annex 1b
+            {
+                type: 'content',
+                title: 'Annex 1b: Running Containers',
+                content: `
+                    <div class="flex justify-center items-center h-full">
+                        <img src="docs/images/02_docker-containers-running.png" alt="Docker Containers Running" class="rounded-lg shadow-md border max-w-full max-h-full object-contain">
+                    </div>
+                `
+            },
+            // Slide 28
+            {
+                type: 'content',
+                title: 'Annex 2a: Kafka Topics Health Check',
+                content: `
+                    <div class="flex justify-center items-center h-full">
+                        <img src="docs/images/03_kafka-topics-created.png" alt="Kafka Topics Created" class="rounded-lg shadow-md border max-w-full max-h-full object-contain">
+                    </div>
+                `
+            },
+             // Slide 29
+            {
+                type: 'content',
+                title: 'Annex 2b: Elasticsearch Cluster Health Check',
+                content: `
+                     <div class="flex justify-center items-center h-full">
+                        <img src="docs/images/02a_elasticsearch-health-check.png" alt="Elasticsearch Health Check" class="rounded-lg shadow-md border max-w-full max-h-full object-contain">
+                    </div>
+                `
+            },
+            // Slide 30
+            {
+                type: 'content',
+                title: 'Annex 3: Elasticsearch Schema Setup',
+                content: `
+                     <p class="mb-6 md:mb-8 text-gray-600">An index template was created to define the schema. Crucially, the \`locationClient\` field was set to \`geo_point\`, which enables map visualizations in Kibana.</p>
+                    <img src="docs/images/09_elasticsearch-index-template-creation.png" alt="Elasticsearch Index Template Creation" class="w-full h-auto rounded-lg shadow-md mx-auto max-w-2xl border">
+                `
+            },
+            // Slide 31
+            {
+                type: 'content',
+                title: 'Annex 4a: DAG 1 Code',
+                content: `
+                    <div class="flex justify-center items-center h-full">
+                        <img src="docs/images/05_dag1-code.png" alt="DAG 1 Code" class="rounded-lg shadow-md border max-w-full max-h-full object-contain">
+                    </div>
+                `
+            },
+            // Slide 32
+            {
+                type: 'content',
+                title: 'Annex 4b: DAG 1 Task Log Proof',
+                content: `
+                     <div class="flex justify-center items-center h-full">
+                        <img src="docs/images/07_dag1-log-consume-task.png" alt="DAG 1 Consume Task Log" class="rounded-lg shadow-md border max-w-full max-h-full object-contain">
+                    </div>
+                `
+            },
+            // Slide 33
+            {
+                type: 'content',
+                title: 'Annex 5a: DAG 2 Code',
+                content: `
+                    <div class="flex justify-center items-center h-full">
+                        <img src="docs/images/09_dag2-code.png" alt="DAG 2 Code" class="rounded-lg shadow-md border max-w-full max-h-full object-contain">
+                    </div>
+                `
+            },
+            // Slide 34
+            {
+                type: 'content',
+                title: 'Annex 5b: DAG 2 Task Log Proof',
+                content: `
+                     <div class="flex justify-center items-center h-full">
+                        <img src="docs/images/10a_dag2-log-transform-task.png" alt="DAG 2 Transform Task Log" class="rounded-lg shadow-md border max-w-full max-h-full object-contain">
+                    </div>
+                `
+            },
+            // Slide 35
+            {
+                type: 'content',
+                title: 'Annex 6a: BigQuery ML Training Data',
+                content: `
+                    <div class="flex justify-center items-center h-full">
+                        <img src="docs/images/15_bigquery-training-data-table.png" alt="BigQuery Training Data Table" class="rounded-lg shadow-md border max-w-full max-h-full object-contain">
+                    </div>
+                `
+            },
+            // Slide 36
+            {
+                type: 'content',
+                title: 'Annex 6b: BigQuery ML Model Training Query',
+                content: `
+                    <div class="flex justify-center items-center h-full">
+                        <img src="docs/images/16_bigquery-model-training-query.png" alt="BigQuery Model Training Query" class="rounded-lg shadow-md border max-w-full max-h-full object-contain">
+                    </div>
+                `
+            },
+            // Slide 37
+            {
+                type: 'content',
+                title: 'Annex 7: BigQuery External Table Verification',
+                content: `
+                     <p class="mb-6 md:mb-8 text-gray-600">A \`SELECT *\` query on the external table successfully retrieves data from GCS, proving the connection between the data warehouse and data lake is working.</p>
+                    <img src="docs/images/14_bigquery-external-table-query-result.png" alt="BigQuery External Table Query Result" class="w-full h-auto rounded-lg shadow-md mx-auto max-w-2xl border">
+                `
+            }
+        ];
+
+        let currentSlide = 0;
+        const presentationContainer = document.querySelector('.relative');
+        const currentSlideEl = document.getElementById('current-slide');
+        const totalSlidesEl = document.getElementById('total-slides');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        function generateTimeline(currentSection) {
+            const sections = ['Overview', 'Demonstration', 'Deliverables', 'Architecture', 'Conclusion', 'Annex'];
+            let html = '<div class="flex gap-1 sm:gap-1.5 w-full max-w-2xl mx-auto mt-8 md:mt-12">';
+            sections.forEach((section, index) => {
+                const isCurrent = (index + 1) === currentSection;
+                const classes = isCurrent
+                    ? 'bg-indigo-600 text-white font-bold'
+                    : 'bg-gray-200 text-gray-600';
+                html += `<div class="flex-1 p-2 rounded-md text-center text-xs md:text-sm transition-colors ${classes}">${section}</div>`;
+            });
+            html += '</div>';
+            return html;
+        }
+
+        function renderSlides() {
+            let html = '';
+            slidesData.forEach((slide, index) => {
+                const activeClass = index === 0 ? 'active' : '';
+                let extraClasses = 'p-6 sm:p-8 md:p-12';
+                 if (slide.type === 'cover' || slide.type === 'title' || slide.isCentered) {
+                    extraClasses += ' slide-center-content';
+                }
+
+                html += `<div id="slide-${index}" class="slide ${activeClass} ${extraClasses}">`;
+
+                if (slide.type === 'cover') {
+                    html += `
+                        <div class="text-center items-center w-full">
+                             <p class="text-xl sm:text-2xl text-gray-500 mb-4">${slide.meeting}</p>
+                            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-gray-800 leading-tight my-4">${slide.title}</h1>
+                            ${slide.subtitle ? `<p class="mt-4 text-lg sm:text-xl md:text-2xl text-indigo-600 font-medium">${slide.subtitle}</p>` : ''}
+                            <div class="mt-10">
+                                <p class="text-xl sm:text-2xl text-gray-800 font-medium">${slide.presenter}</p>
+                                <p class="text-sm sm:text-base text-gray-500 mt-2">${slide.contact.email}</p>
+                                <p class="text-sm sm:text-base text-indigo-600 hover:underline mt-1"><a href="https://${slide.contact.github}" target="_blank">${slide.contact.github}</a></p>
+                            </div>
+                            <p class="mt-6 text-lg sm:text-xl text-gray-500">${slide.date}</p>
+                        </div>
+                    `;
+                } else if (slide.type === 'title') {
+                     let timelineHtml = slide.sectionNumber ? generateTimeline(slide.sectionNumber) : '';
+                    html += `
+                        <div class="text-center w-full">
+                            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 leading-tight">${slide.title}</h1>
+                            <p class="mt-4 text-lg sm:text-xl md:text-2xl text-indigo-600 font-medium">${slide.subtitle}</p>
+                            ${timelineHtml}
+                        </div>
+                    `;
+                } else { // content slide
+                     const titleAlignment = slide.isCentered ? 'text-center' : 'text-left';
+                     html += `
+                        <div class="w-full">
+                            <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6 ${titleAlignment}">${slide.title}</h2>
+                            <div class="text-base md:text-lg leading-relaxed">${slide.content}</div>
+                        </div>
+                    `;
+                }
+                html += `</div>`;
+            });
+            presentationContainer.innerHTML = html;
+        }
+
+        function updateControls() {
+            totalSlidesEl.textContent = slidesData.length;
+            currentSlideEl.textContent = currentSlide + 1;
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === slidesData.length - 1;
+        }
+        
+        function showSlide(index) {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach((slide) => {
+                slide.classList.remove('active');
+                 slide.style.display = 'none';
+            });
+            const newSlide = document.getElementById(`slide-${index}`);
+            if(newSlide) {
+                newSlide.classList.add('active');
+                 newSlide.style.display = 'flex';
+            }
+            currentSlide = index;
+            updateControls();
+        }
+
+        nextBtn.addEventListener('click', () => {
+            if (currentSlide < slidesData.length - 1) {
+                showSlide(currentSlide + 1);
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        });
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                nextBtn.click();
+            } else if (e.key === 'ArrowLeft') {
+                prevBtn.click();
+            }
+        });
+
+        // Initial setup
+        renderSlides();
+        showSlide(0);
+    </script>
+</body>
+</html>
